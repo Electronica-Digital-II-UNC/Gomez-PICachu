@@ -1,0 +1,15 @@
+Warning[205] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 1 : Found directive in column 1. (list)
+Warning[207] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 10 : Found label after column 1. (INICIO)
+Warning[203] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 12 : Found opcode in column 1. (BSF)
+Warning[203] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 13 : Found opcode in column 1. (BSF)
+Warning[203] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 14 : Found opcode in column 1. (CLRF)
+Message[302] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 14 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 15 : Found opcode in column 1. (CLRF)
+Message[302] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 15 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 16 : Found opcode in column 1. (BCF)
+Warning[203] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 17 : Found opcode in column 1. (CLRF)
+Message[302] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 17 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 18 : Found opcode in column 1. (CLRF)
+Message[302] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 18 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 19 : Found opcode in column 1. (CLRF)
+Message[302] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 19 : Register in operand not in bank 0.  Ensure that bank bits are correct.

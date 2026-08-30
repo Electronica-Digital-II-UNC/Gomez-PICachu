@@ -9,7 +9,3 @@ Message[302] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 15 : Register in operand
 Warning[203] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 16 : Found opcode in column 1. (BCF)
 Warning[203] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 17 : Found opcode in column 1. (CLRF)
 Message[302] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 17 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Warning[203] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 18 : Found opcode in column 1. (CLRF)
-Message[302] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 18 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Warning[203] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 19 : Found opcode in column 1. (CLRF)
-Message[302] B:\TRABAJOS MPLAB\NUEBO_PORYECTO.X\TP2.ASM 19 : Register in operand not in bank 0.  Ensure that bank bits are correct.

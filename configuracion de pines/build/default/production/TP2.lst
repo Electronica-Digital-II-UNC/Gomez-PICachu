@@ -1,4 +1,4 @@
-MPASM 5.87                           TP2.ASM   8-30-2026  20:00:09         PAGE  1
+MPASM 5.87                           TP2.ASM   8-30-2026  20:09:09         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -33,10 +33,10 @@ Warning[203]: Found opcode in column 1. (BSF)
 0006   1703           00013 BSF     STATUS,RP1  ;banco 3
 Warning[203]: Found opcode in column 1. (CLRF)
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0007   0188           00014 CLRF    ANSEL    ;todos los puertos son dijitales
+0007   0188           00014 CLRF    ANSEL    ;todos los puertos son digitales
 Warning[203]: Found opcode in column 1. (CLRF)
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0008   0189           00015 CLRF    ANSELH   ;todos los puertos son dijitales
+0008   0189           00015 CLRF    ANSELH   ;todos los puertos son digitales
 Warning[203]: Found opcode in column 1. (BCF)
 0009   1303           00016 BCF     STATUS, RP1  ;banco 1
 Warning[203]: Found opcode in column 1. (CLRF)
@@ -45,7 +45,7 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                       00018 
                       00019 
 3FE1 2CFF             00020     END
-MPASM 5.87                           TP2.ASM   8-30-2026  20:00:09         PAGE  2
+MPASM 5.87                           TP2.ASM   8-30-2026  20:09:09         PAGE  2
 
 
 SYMBOL TABLE
@@ -104,7 +104,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM 5.87                           TP2.ASM   8-30-2026  20:00:09         PAGE  3
+MPASM 5.87                           TP2.ASM   8-30-2026  20:09:09         PAGE  3
 
 
 SYMBOL TABLE
@@ -163,7 +163,7 @@ CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
 CHS3                              00000005
-MPASM 5.87                           TP2.ASM   8-30-2026  20:00:09         PAGE  4
+MPASM 5.87                           TP2.ASM   8-30-2026  20:09:09         PAGE  4
 
 
 SYMBOL TABLE
@@ -222,7 +222,7 @@ INTEDG                            00000006
 INTF                              00000001
 IOCB                              00000096
 IOCB0                             00000000
-MPASM 5.87                           TP2.ASM   8-30-2026  20:00:09         PAGE  5
+MPASM 5.87                           TP2.ASM   8-30-2026  20:09:09         PAGE  5
 
 
 SYMBOL TABLE
@@ -281,7 +281,7 @@ PCON                              0000008E
 PDC0                              00000000
 PDC1                              00000001
 PDC2                              00000002
-MPASM 5.87                           TP2.ASM   8-30-2026  20:00:09         PAGE  6
+MPASM 5.87                           TP2.ASM   8-30-2026  20:09:09         PAGE  6
 
 
 SYMBOL TABLE
@@ -340,7 +340,7 @@ RC1                               00000001
 RC2                               00000002
 RC3                               00000003
 RC4                               00000004
-MPASM 5.87                           TP2.ASM   8-30-2026  20:00:09         PAGE  7
+MPASM 5.87                           TP2.ASM   8-30-2026  20:09:09         PAGE  7
 
 
 SYMBOL TABLE
@@ -399,7 +399,7 @@ SSPCON                            00000014
 SSPCON2                           00000091
 SSPEN                             00000005
 SSPIE                             00000003
-MPASM 5.87                           TP2.ASM   8-30-2026  20:00:09         PAGE  8
+MPASM 5.87                           TP2.ASM   8-30-2026  20:09:09         PAGE  8
 
 
 SYMBOL TABLE
@@ -458,7 +458,7 @@ TOUTPS2                           00000005
 TOUTPS3                           00000006
 TRISA                             00000085
 TRISA0                            00000000
-MPASM 5.87                           TP2.ASM   8-30-2026  20:00:09         PAGE  9
+MPASM 5.87                           TP2.ASM   8-30-2026  20:09:09         PAGE  9
 
 
 SYMBOL TABLE
@@ -517,7 +517,7 @@ TXEN                              00000005
 TXIE                              00000004
 TXIF                              00000004
 TXREG                             00000019
-MPASM 5.87                           TP2.ASM   8-30-2026  20:00:09         PAGE 10
+MPASM 5.87                           TP2.ASM   8-30-2026  20:09:09         PAGE 10
 
 
 SYMBOL TABLE
@@ -576,7 +576,7 @@ _CONFIG1                          00002007
 _CONFIG2                          00002008
 _CPD_OFF                          00003FFF
 _CPD_ON                           00003F7F
-MPASM 5.87                           TP2.ASM   8-30-2026  20:00:09         PAGE 11
+MPASM 5.87                           TP2.ASM   8-30-2026  20:09:09         PAGE 11
 
 
 SYMBOL TABLE

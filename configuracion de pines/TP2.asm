@@ -11,8 +11,8 @@ list P=16F887
  
 BSF	STATUS,RP0
 BSF	STATUS,RP1  ;banco 3
-CLRF	ANSEL	 ;todos los puertos son dijitales
-CLRF	ANSELH	 ;todos los puertos son dijitales
+CLRF	ANSEL	 ;todos los puertos son digitales
+CLRF	ANSELH	 ;todos los puertos son digitales
 BCF	STATUS, RP1  ;banco 1
 CLRF	TRISB	  ;PONGO ESTOS PUERTOS COMO SALIDA
 

@@ -4,8 +4,7 @@ __CONFIG _CONFIG1, _FOSC_XT & _WDTE_OFF & _PWRTE_ON & _MCLRE_ON
 __CONFIG _CONFIG2, _LVP_OFF & _BOR_OFF
 
 ; Funciones que llama el main:
-EXTERN  Retardo_20ms
-EXTERN  Retardo_200ms
+EXTERN  Retardo_20ms	    ; Se quito retardo de 200ms, se usa 20ms X 10
 EXTERN  IncrementarContador
 EXTERN  ResetContador
 EXTERN  InicializarSecuencia
@@ -21,7 +20,7 @@ PuertoLEDS  EQU	PORTB	; salida a leds
 DatosMain   UDATA		; variables para la secuencia
 EstadoAnteriorA0    RES     1
 EstadoAnteriorA1    RES     1  
-  
+Pasos		    RES	    1	; CORRECCION: se usa para contar los retardos    
 CodigoMain  CODE
 
 ORG     0x00
@@ -41,6 +40,7 @@ Inicio:			    ; Programa de arranque, una vez.
     BCF     STATUS,RP0      ; volver a Banco 0
 
 CALL    InicializarSecuencia
+CALL    ResetContador	    ; CORRECCION: para empezar siempre en leds apagados
 BANKSEL PORTA
     
 Espera:		   ; Loop principal, espera pulsacion Ao y valida, sino->Espera2
@@ -119,61 +119,79 @@ ChequearA1:		; segunda parte del loop general del contador, revisa A1
 	
 ;-- CODIGO DEL LOOP DE LA SECUENCIA --
 	
+; CORECCION: ahora la idea no es unar un retardo de 200ms, sino 10 de 20ms
+; para poder poner entre medias revicion de pulsadores, para llevar el conteo
+; se usa la variable Pasos que funciona de contador, en las nueve primera 
+;cuentas, solo revisa pulso, en la decima rota el led. Bambio orden general del
+; codigo
 	
 EntrarSecuencia:		;limpia y prepara para el loop principal de secu
     BANKSEL EstadoAnteriorA0
     CLRF    EstadoAnteriorA0
     CLRF    EstadoAnteriorA1
+    CLRF    Pasos		;CORRECCION, limpia var para cada entrada
     GOTO    LoopSecuencia	
     
-LoopSecuencia:
-    BANKSEL Sentido 
-    BTFSC   Sentido, 0
-    GOTO    Rotar_Izq_Sec
-    CALL    RotarDer
-    GOTO    Mostrar_Sec
+LoopSecuencia:			;loop principal de secuencia
+    CALL    Retardo_20ms
+    BANKSEL PORTA
+				    ;A1 simpre es cero al entrar por prim vez
+    BTFSS   PORTA, 1                ; evalia A!
+    GOTO    A1_Bajo_Sec			; si es 0, lo registra y desp check a0
+    BANKSEL EstadoAnteriorA1		; si es 1, pasa a cambiar sentido
+    BTFSC   EstadoAnteriorA1, 0	    ; evalua si se manteine presioando
+    GOTO    A1_Ya_Alto_Sec
+    BANKSEL Sentido		    ; una vez soltado, cambia sentido
+    MOVLW   0x01
+    XORWF   Sentido, F
     
-    Rotar_Izq_Sec:
-    CALL    RotarIzq
-    
-    Mostrar_Sec:
-	BANKSEL Secu
-        MOVF    Secu, W
-	BANKSEL PuertoLEDS
-        MOVWF   PuertoLEDS
-
-	CALL    Retardo_200ms
-	BANKSEL PORTA 
-	
-	BTFSS   PORTA, 1		; cambia la secuencia xuando A1 0->1
-	GOTO    A1_Bajo_Sec
-	BANKSEL EstadoAnteriorA1
-        BTFSC   EstadoAnteriorA1, 0
-	GOTO    A1_Ya_Alto_Sec          ; ya estaba en 1, no es flanco nuevo
-	BANKSEL Sentido 
-        MOVLW   0x01
-	XORWF   Sentido, F              ; flanco real -> invertir sentido
-
-    A1_Ya_Alto_Sec:
+    A1_Ya_Alto_Sec:			    ; registra si A1 es 1
 	BANKSEL EstadoAnteriorA1
 	BSF     EstadoAnteriorA1, 0
-        GOTO    Chequear_A0_Sec
-    A1_Bajo_Sec:
+	GOTO    Chequear_A0_Sec
+    
+    ; va a otra linea antes de lelgar a esta
+    
+    A1_Bajo_Sec:			    ; Registra si a1 es 0
 	BANKSEL EstadoAnteriorA1
-        BCF     EstadoAnteriorA1, 0
-	BANKSEL PORTA 
-	
+        BCF     EstadoAnteriorA1, 0	; pasa directo a check a0
+
     Chequear_A0_Sec:
-	BTFSS   PORTA, 0
-	GOTO    A0_Bajo_Sec
-	BANKSEL EstadoAnteriorA0
-        BTFSC   EstadoAnteriorA0, 0
-	GOTO    LoopSecuencia          ; ya estaba en 1, seguir rotando
-        GOTO    Espera                  ; flanco real -> detener y salir
-    A0_Bajo_Sec:
-	BANKSEL EstadoAnteriorA0
-	BCF     EstadoAnteriorA0, 0
-        GOTO    LoopSecuencia
-	
-	
-END
+	BANKSEL PORTA
+        BTFSS   PORTA, 0                ; detiene con A0 
+	GOTO    A0_Bajo_Sec		; si es cero, pasa a registrar
+        BANKSEL EstadoAnteriorA0
+	BTFSC   EstadoAnteriorA0, 0
+        GOTO    Avanzar_Paso_Sec        ; ya estaba en 1, no es flanco -> seguir
+	BANKSEL PuertoLEDS
+        CLRF    PuertoLEDS              ; flanco real -> apagar LEDs y salir
+	GOTO    Espera
+
+A0_Bajo_Sec:			    ;registra si a0 vale 0
+    BANKSEL EstadoAnteriorA0
+    BCF     EstadoAnteriorA0, 0
+
+Avanzar_Paso_Sec:                   ; se evalua la cuenta de Paso
+    BANKSEL Pasos
+    INCF    Pasos, F
+    MOVLW   D'10'
+    SUBWF   Pasos, W
+    BTFSS   STATUS, Z               ; evalua si Paso llega a 10
+    GOTO    LoopSecuencia           ; si no, vuelve al loop de secuencia
+    CLRF    Pasos                   ; sí si, limpia var y pasa a leda
+
+    BANKSEL Sentido
+    BTFSC   Sentido, 0		;evalua sentido
+    GOTO    Rotar_Izq_Sec	    ; si es 1, pasa a la funcion de rotIzq
+    CALL    RotarDer
+    GOTO    Mostrar_Sec
+Rotar_Izq_Sec:			; se usa funcion para poder saltar a mostrar
+    CALL    RotarIzq
+Mostrar_Sec:			;
+    BANKSEL Secu
+    MOVF    Secu, W
+    BANKSEL PuertoLEDS
+    MOVWF   PuertoLEDS
+    GOTO    LoopSecuencia
+
+    END
